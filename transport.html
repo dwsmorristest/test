@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+</head>
+<body>
+	<button>Get Server Header</button>
+	<h1>header tags</h1>
+
+	<script>
+		// http://stackoverflow.com/questions/15005500/loading-cross-domain-html-page-with-ajax
+		$.ajaxPrefilter(function (options) {
+			if (options.crossDomain && jQuery.support.cors) {
+				// redirect ajax request via proxy server that adds CORS headers
+				var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+				options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+			}
+		});
+		
+		$("button").click(function (event) {
+			// make ajax call to speechmatics via cors-anywhere
+			$.get('http://www.speechmatics.com', function (response, success, details) {
+				// extract response headers and display on the page
+				var headers = details.getAllResponseHeaders();
+				$("h1").text(headers);
+			});
+		});
+	</script>
+</body>
+</html>

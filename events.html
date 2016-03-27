@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+</head>
+<body>
+	<div style="width : 640px;height:480px;position: relative">
+		<h1 style="display: none;position : absolute;top:20px;right:20px;">Green</h1>
+		<h1 style="display : none;position : absolute;bottom:20px;right:20px;">Red</h1>
+		<img src="green.png" style = "position:absolute;top:0;left:0"/>
+		<img src="red.png" style = "position:absolute;top:0;left:0"/>
+	</div>
+	
+	<script>
+		// absolute bounds of images
+		var redLeft = 43, redTop = 312, redRight = 194, redBottom = 450;
+		var greenLeft = 38, greenTop = 35, greenRight = 189, greenBottom = 173;
+
+		$(document).mousemove(function (event) {
+			var mouseX = event.pageX;
+			var mouseY = event.pageY;
+
+			if (mouseX >= redLeft && mouseX <= redRight && mouseY <= redBottom && mouseY >= redTop) {
+				// Red label extracted by index
+				$("h1").eq(1).css("display", "block");
+			} else if (mouseX >= greenLeft && mouseX <= greenRight && mouseY <= greenBottom && mouseY >= greenTop) {
+				// Green label extracted by index
+				$("h1").eq(0).css("display", "block");
+			} else {
+				// hide both labels
+				$("h1").css("display", "none");
+			}
+		});
+	</script>
+</body>
+</html>

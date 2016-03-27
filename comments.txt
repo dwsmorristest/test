@@ -1,0 +1,22 @@
+EVENTS
+
+Not being able to touch the markup reduces the options, e.g. we have to reference the images by index instead of by class/id.
+
+There is duplicated information due to the way the images are formatted. They should be cropped and positioned by CSS. 
+Then we can use jQuery handlers for mouseover/mouseout, or hover, directly on structural elements of the page rather than needing complicated manual bound calculations. 
+The current setup is also brittle to resource modification. 
+
+I don't like css poluting markup, or styles being directly modified by JavaScript as is being done here :). I'd like to separate out the HTML, CSS and JS in a clearer way, 
+e.g. I like the web components standard/polymer.js that lets you separate concerns within a single reusable component file.
+
+
+TRANSPORT
+
+Browsers implement the same-origin policy to prevent access to content served by third-party domains. 
+CORS is a W3C recommended standard for allowing such cross-origin requests.
+
+To make an ajax call to speechmatics.com, I have directed the request via the CORS Anywhere proxy server. 
+This initiates the request on behalf of our application, and adds CORS headers to the response so that it may be processed by our page.
+
+The response header "Access-Control-Allow-Origin: *" has been added by CORS Anywhere and is visible in the output on our page. 
+The header permits scripts hosted on any site from accessing the resource.
